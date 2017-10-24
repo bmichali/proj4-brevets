@@ -8,7 +8,7 @@ logging.basicConfig(format='%(levelname)s:%(message)s',level=logging.WARNING)
 log = logging.getLogger(__name__)
 
 def test_zero_km():
-	assert open_time(0, 200, arrow.get("2017-01-01T08:00:00+00:00")) == '2017-01-01T00:00:00'
+	assert open_time(0, 200, arrow.get("2017-01-01T08:00:00+00:00")) == '2017-01-01T08:00:00+00:00'
 	assert close_time(0, 200, arrow.get("2017-01-01T08:00:00+00:00")) == '2017-01-01T09:00:00+00:00'
 
 def test_200km():
