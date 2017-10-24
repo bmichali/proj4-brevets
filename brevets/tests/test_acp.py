@@ -9,11 +9,11 @@ logging.basicConfig(format='%(levelname)s:%(message)s',
 log = logging.getLogger(__name__)
 
 
-def test_zero_km(s, t):
+def test_zero_km():
   	#open_time(control_dist_km, brevet_dist_km, brevet_start_time)
 
-    assert open_time(0, 200, "2017-01-01T00:00:00") == "2017-01-01T00:00:00"
-    assert close_time(0, 200, "2017-01-01T00:00:00") == "2017-01-01T09:00:00+00:00"
+	assert open_time(0, 200, "2017-01-01T00:00:00") == "2017-01-01T00:00:00"
+	assert close_time(0, 200, "2017-01-01T00:00:00") == "2017-01-01T09:00:00+00:00"
 
 def test_200km():
     assert open_time(200, 200, "2017-01-01T00:00:00") == "2017-01-01T13:52:56.470588+00:00"
