@@ -20,7 +20,8 @@
   <!-- moment.js is the JavaScript equivalent of arrow.py -->
   <script 
     src="{{ url_for('static', filename="js/moment.min.js") }}"></script>
-
+  <script
+    src="{{ url_for('static', filename="js/moment-timezone.js") }}"></script>
 </head>
 
    <!-- Our own style sheet -->
@@ -124,10 +125,14 @@
   // stash them in hidden fields.) 
   function calc_times(control) {
     var km = control.find("input[name='km']").val();
+    var brevet_dist = document.getElementById("brevet_dist_km");
+    brevet_dist = brevet_dist.options[brevet_dist.selectedIndex].value
+    var begin_date = new Date($('#begin_date').val() + " " + $(' #begin_time').val()).toISOString();
     var open_time_field = control.find("input[name='open']");
     var close_time_field = control.find("input[name='close']");
     
-    $.getJSON(TIME_CALC_URL, { km: km }, 
+    $.getJSON(TIME_CALC_URL, { km: km, begin_date: begin_date,
+                              brevet_dist: brevet_dist},
       // response handler
       function(data) {
          var times = data.result;
@@ -162,6 +167,15 @@
              var control_entry = $(this).parents(".control")
              var target = control_entry.find("input[name='miles']");
              target.val( miles );
+             // Then calculate times for this entry
+             calc_times(control_entry);
+          });
+
+      $('input[name="distance"]').change(
+         function() {
+             var distance = parseInt($(this).val());
+             console.log("Brevet Distance Changed: " + distance);
+             var control_entry = $(this).parents(".control")
              // Then calculate times for this entry
              calc_times(control_entry);
           });
