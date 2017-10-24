@@ -1,17 +1,12 @@
 
-
 from acp_times import open_time, close_time
 
 import nose    # Testing framework
 import logging
-logging.basicConfig(format='%(levelname)s:%(message)s',
-                    level=logging.WARNING)
+logging.basicConfig(format='%(levelname)s:%(message)s',level=logging.WARNING)
 log = logging.getLogger(__name__)
 
-
 def test_zero_km():
-  	#open_time(control_dist_km, brevet_dist_km, brevet_start_time)
-
 	assert open_time(0, 200, "2017-01-01T00:00:00") == "2017-01-01T00:00:00"
 	assert close_time(0, 200, "2017-01-01T00:00:00") == "2017-01-01T09:00:00+00:00"
 
@@ -28,7 +23,7 @@ def test_300km_for_200_dist():
     assert close_time(300, 200, "2017-01-01T00:00:00") == "2017-01-01T21:30:00+00:00"
 
 def test_boundaries():
-   	assert open_time(300, 300, "2017-01-01T00:00:00") == "2017-01-01T16:49:24.705882+00:00"
+	assert open_time(300, 300, "2017-01-01T00:00:00") == "2017-01-01T16:49:24.705882+00:00"
     assert close_time(300, 300, "2017-01-01T00:00:00") == "2017-01-02T04:00:00+00:00"
 
     assert open_time(400, 400, "2017-01-01T00:00:00") == "2017-01-01T19:45:52.941176+00:00"
